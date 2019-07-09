@@ -1,2 +1,2 @@
-# hrms
-Human Resource Management System
+# HRMS
+Human Resource Management System. Built with django Framework
