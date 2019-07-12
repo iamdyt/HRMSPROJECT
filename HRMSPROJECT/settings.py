@@ -123,6 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = 'hrms:dashboard'
+#LOGIN_URL = 'hrms:login'
 MEDIA_URL = '/media/' #This is just for url i.e https://l.me/media/l.jpg
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #This is the folder the image will be uploaded
 

@@ -4,66 +4,63 @@
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="images/faces/face1.jpg" alt="profile image">
+                  <img src="{{request.session.auth_user_thumb}}">
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">{{user.username}} </p>
+                  <p class="profile-name">{{request.session.auth_user | upper}} </p>
                   <div>
-                    <small class="designation text-muted">Manager</small>
+                    <small class="designation text-muted">Administrator</small>
                     <span class="status-indicator online"></span>
                   </div>
                 </div>
               </div>
-              <button class="btn btn-success btn-block">New Project
+              <button class="btn btn-success btn-block">New Staff
                 <i class="mdi mdi-plus"></i>
               </button>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
-              <i class="menu-icon mdi mdi-television"></i>
-              <span class="menu-title">Dashboard</span>
+            <a class="nav-link" href="{% url 'hrms:dashboard' %}">
+              <i class="fa  fa-dashboard"></i>
+              <span class="menu-title">&emsp;Dashboard</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="menu-icon mdi mdi-content-copy"></i>
-              <span class="menu-title">Basic UI Elements</span>
-              <i class="menu-arrow"></i>
+            <a class="nav-link" href="{% url 'hrms:employee_all' %}" aria-expanded="false" aria-controls="ui-basic">
+              <i class="fa fa-list text-dark"></i>
+              <span class="menu-title">&emsp;Employee</span>
             </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="pages/forms/basic_elements.html">
-              <i class="menu-icon mdi mdi-backup-restore"></i>
-              <span class="menu-title">Form elements</span>
+              <i class="fa fa-calendar"></i>
+              <span class="menu-title">&emsp;Attendance</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="pages/charts/chartjs.html">
-              <i class="menu-icon mdi mdi-chart-line"></i>
-              <span class="menu-title">Charts</span>
+              <i class="fa fa-sign-out "></i>
+              <span class="menu-title">&emsp;Leave</span>
             </a>
           </li>
+
+            <li class="nav-item">
+            <a class="nav-link" href="pages/tables/basic-table.html">
+              <i class="fa fa-database"></i>
+              <span class="menu-title">&emsp;Recruitment</span>
+            </a>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="pages/tables/basic-table.html">
-              <i class="menu-icon mdi mdi-table"></i>
-              <span class="menu-title">Tables</span>
+              <i class="fa fa-usd"></i>
+              <span class="menu-title">&emsp;Payroll</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="pages/icons/font-awesome.html">
-              <i class="menu-icon mdi mdi-sticker"></i>
-              <span class="menu-title">Icons</span>
+              <i class="fa  fa-gears"></i>
+              <span class="menu-title">&emsp;Settings</span>
             </a>
           </li>
         </ul>

@@ -9,48 +9,28 @@
   <title>Kazzy Steel | HRMS</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{% static 'hrms/vendors/iconfonts/mdi/css/materialdesignicons.min.css' %} ">
+  <link rel="stylesheet" href="{% static 'hrms/vendors/iconfonts/font-awesome/css/font-awesome.css' %} ">
   <link rel="stylesheet" href="{% static 'hrms/vendors/css/vendor.bundle.base.css' %}">
   <link rel="stylesheet" href="{% static 'hrms/vendors/css/vendor.bundle.addons.css' %}">
   <link rel="stylesheet" href="{% static 'hrms/css/style.css' %}">
   <link rel="shortcut icon" href="{% static 'hrms/images/favicon.png' %}" />
 </head>
-
+  
 <body>
   <div class="container-scroller">
-    <!-- partial:partials/_navbar.html -->
     {% include "hrms/nav.html" %}
-    <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_sidebar.html -->
       {% include 'hrms/sidebar.html' %}
-      <!-- partial -->
-
-      <!--  MAIN BODY START HERE -->
-        {% block body %} {% endblock body %}
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
+        {% block content %} {% endblock content %}
         {% include 'hrms/footer.html' %}
-        <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
     </div>
-    <!-- page-body-wrapper ends -->
   </div>
-  <!-- container-scroller -->
-
   <!-- plugins:js -->
   <script src="{% static 'hrms/vendors/js/vendor.bundle.base.js' %}"></script>
   <script src="{% static 'hrms/vendors/js/vendor.bundle.addons.js' %}"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <!-- End plugin js for this page-->
-  <!-- inject:js -->
   <script src="js/off-canvas.js"></script>
   <script src="js/misc.js"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
   <script src="js/dashboard.js"></script>
-  <!-- End custom js for this page-->
 </body>
 
 </html>
