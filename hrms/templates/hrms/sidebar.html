@@ -7,16 +7,16 @@
                   <img src="{{request.session.auth_user_thumb}}">
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">{{request.session.auth_user | upper}} </p>
+                  <p class="profile-name">{{request.session.auth_user | capfirst}} </p>
                   <div>
                     <small class="designation text-muted">Administrator</small>
                     <span class="status-indicator online"></span>
                   </div>
                 </div>
               </div>
-              <button class="btn btn-success btn-block">New Staff
+              <a href="{% url 'hrms:employee_new' %}" class="btn btn-success btn-block">New Staff
                 <i class="mdi mdi-plus"></i>
-              </button>
+              </a>
             </div>
           </li>
           <li class="nav-item">
@@ -44,7 +44,25 @@
             </a>
           </li>
 
-            <li class="nav-item">
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="fa fa-folder "></i>
+              <span class="menu-title">&emsp;Department</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+              {% for dept in request.session.depts %}
+                 <li class="nav-item">
+                  <a class="nav-link" href="pages/ui-features/buttons.html">{{dept.department}}</a>
+                </li>
+              {% endfor %}
+              </ul>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
             <a class="nav-link" href="pages/tables/basic-table.html">
               <i class="fa fa-database"></i>
               <span class="menu-title">&emsp;Recruitment</span>

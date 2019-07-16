@@ -6,13 +6,14 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Kazzy Steel | HRMS</title>
+  <title>{% block title  %}{% endblock title %}</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{% static 'hrms/vendors/iconfonts/mdi/css/materialdesignicons.min.css' %} ">
   <link rel="stylesheet" href="{% static 'hrms/vendors/iconfonts/font-awesome/css/font-awesome.css' %} ">
   <link rel="stylesheet" href="{% static 'hrms/vendors/css/vendor.bundle.base.css' %}">
   <link rel="stylesheet" href="{% static 'hrms/vendors/css/vendor.bundle.addons.css' %}">
   <link rel="stylesheet" href="{% static 'hrms/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'hrms/css/toastr.min.css' %}">
   <link rel="shortcut icon" href="{% static 'hrms/images/favicon.png' %}" />
 </head>
   
@@ -28,9 +29,10 @@
   <!-- plugins:js -->
   <script src="{% static 'hrms/vendors/js/vendor.bundle.base.js' %}"></script>
   <script src="{% static 'hrms/vendors/js/vendor.bundle.addons.js' %}"></script>
-  <script src="js/off-canvas.js"></script>
-  <script src="js/misc.js"></script>
-  <script src="js/dashboard.js"></script>
+  <script src="{% static 'hrms/js/toastr.min.js' %}"></script>
+
+  {% block noty %}
+  {% endblock noty %}
 </body>
 
 </html>

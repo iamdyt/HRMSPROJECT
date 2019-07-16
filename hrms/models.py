@@ -10,15 +10,17 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
+
 class Employee(models.Model):
     LANGUAGE = (('english','ENGLISH'),('yoruba','YORUBA'),('hausa','HAUSA'),('french','FRENCH'))
     GENDER = (('male','MALE'), ('female', 'FEMALE'),('other', 'OTHER'))
     emp_id = models.CharField(max_length=70, unique=True, default='emp'+str(random.randrange(100,999,1)))
-    thumb = models.ImageField(blank=True)
+    thumb = models.ImageField(blank=True,null=True)
     first_name = models.CharField(max_length=50, null=False)
     last_name = models.CharField(max_length=50, null=False)
     mobile = models.CharField(max_length=15)
     email = models.EmailField(max_length=125, null=False)
+    address = models.TextField(max_length=100, default='')
     emergency = models.CharField(max_length=11)
     gender = models.CharField(choices=GENDER, max_length=10)
     department = models.ForeignKey(Department,on_delete=models.SET_NULL, null=True)
@@ -27,6 +29,17 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.first_name
+
+class Kin(models.Model):
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    address = models.TextField(max_length=100)
+    occupation = models.CharField(max_length=20)
+    mobile = models.CharField(max_length=15)
+    employee = models.OneToOneField(Employee,on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return self.first_name+'-'+self.last_name
 
 class Attendance (models.Model):
     STATUS = (('PRESENT', 'PRESENT'), ('ABSENT', 'ABSENT'),('UNAVAILABLE', 'UNAVAILABLE'))
