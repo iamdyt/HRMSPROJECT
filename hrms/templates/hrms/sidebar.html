@@ -52,11 +52,21 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-              {% for dept in request.session.depts %}
-                 <li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/buttons.html">{{dept.department}}</a>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'hrms:dept_detail' pk=1 %}">Administrative</a>
                 </li>
-              {% endfor %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'hrms:dept_detail' pk=3 %}">Finance</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'hrms:dept_detail' pk=5 %}">Production</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'hrms:dept_detail' pk=2 %}">Sales</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'hrms:dept_detail' pk=4 %}">Work</a>
+                </li>
               </ul>
             </div>
           </li>

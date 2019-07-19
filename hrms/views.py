@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect, resolve_url
+from django.shortcuts import render,redirect, resolve_url,reverse
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from .models  import AdminProfile,Employee, Department,Kin
@@ -10,6 +10,7 @@ from .forms import RegistrationForm,LoginForm,EmployeeForm,KinForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.serializers import serialize
 from django.contrib import messages
+import json
 
 # Create your views here.
 class Index(View):
@@ -30,16 +31,14 @@ class Login_View(LoginView):
 
     def get_success_url(self):
         query = User.objects.get(adminprofile__user=self.request.user.pk)
-        dep = Department.objects.all()
         self.request.session['auth_user'] = query.username
         self.request.session['auth_user_thumb'] = query.adminprofile.thumb.url
-        self.request.session['depts'] = serialize('json',dep)
-        url = reverse_lazy('hrms:dashboard')
+        url = resolve_url('hrms:dashboard')
         return url
 
 class Logout_View(View):
-    def get(self,request):
-        logout(request)
+    def get(self):
+        logout(self.request)
         return redirect ('hrms:login',permanent=True)
     
     
@@ -103,10 +102,47 @@ class Employee_Kin_Add (CreateView):
     model = Kin
     form_class = KinForm
     template_name = 'hrms/employee/kin_add.html'
-    success_url = reverse_lazy('hrms:employee_all')
+    success_url = reverse_lazy('hrms:employee_view')
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        if 'id' in self.kwargs:
+            emp = Employee.objects.get(pk=self.kwargs['id'])
+            context['emp'] = emp
+            return context
+        else:
+            return context
 
 class Employee_Kin_Update(UpdateView):
     model = Kin
     form_class = KinForm
     template_name = 'hrms/employee/kin_update.html'
     success_url = reverse_lazy('hrms:employee_all')
+
+    def get_initial(self):
+        initial = super(Employee_Kin_Update,self).get_initial()
+        
+        if 'id' in self.kwargs:
+            emp =  Employee.objects.get(pk=self.kwargs['id'])
+            initial['id_employee'] = emp.first_name
+            return initial
+
+#Department views
+
+class Department_Detail(ListView):
+    context_object_name = 'employees'
+    template_name = 'hrms/department/single.html'
+    def get_queryset(self): 
+        queryset = Employee.objects.filter(department=self.kwargs['pk'])
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["dept"] = Department.objects.get(pk=self.kwargs['pk']) 
+        return context
+    
+
+
+    
+
+

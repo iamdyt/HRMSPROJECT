@@ -14,7 +14,8 @@
                                 <form class="form-group" method="POST">
                                     {% csrf_token %}
                                     <small class="mb-5">** All Fields are required</small><br>
-                                        {{form.first_name.label }}
+                                        {{form.as_p}}
+                                        {% comment %} {{form.first_name.label }}
                                         {{form.first_name}}
                                         
                                         {{form.last_name.label }}
@@ -27,7 +28,7 @@
                                         {{form.occupation}}
 
                                         {{form.mobile.label }}
-                                        {{form.mobile}}
+                                        {{form.mobile}} {% endcomment %}
                                     <div class="text-center mt-3">
                                         <button class="btn btn-outline-success btn-rounded"><i class="mdi mdi-cloud-download"></i>Update Employee</button></button>   
                                     </div>

@@ -99,7 +99,7 @@
                                             </tr>
 
                                             <tr>
-                                                <td><a href="{% url 'hrms:kin_update' pk=kin.pk %}" class=" btn btn-warning"> Update Next of Kin</a></td>
+                                                <td><a href="{% url 'hrms:kin_update' pk=kin.pk id=employee.id %}" class=" btn btn-warning"> Update Next of Kin</a></td>
                                             </tr>
                                         {% else %}
                                             <p class="lead text-center"> 
@@ -107,7 +107,7 @@
                                             </p>
 
                                             <div class="text-center">
-                                                <a href="{% url 'hrms:kin_add' %}" class='btn btn-danger btn-rounded'> <i class="mdi mdi-upload"></i> Upload Now </a>
+                                                <a href="{% url 'hrms:kin_add' id=employee.id %}" class='btn btn-danger btn-rounded'> <i class="mdi mdi-upload"></i> Upload Now </a>
                                             </div>
 
                                         {% endif %}

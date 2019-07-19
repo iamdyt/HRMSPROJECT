@@ -1,11 +1,13 @@
 from django.db import models
 import random
+from django.urls import reverse
 from django.utils import timezone
 import time
 from django.contrib.auth.models import User
 # Create your models here.
 class Department(models.Model):
     name = models.CharField(max_length=70, null=False, blank=False)
+    history = models.TextField(max_length=200,null=True,blank=True, default='No History')
 
     def __str__(self):
         return self.name
@@ -25,8 +27,7 @@ class Employee(models.Model):
     gender = models.CharField(choices=GENDER, max_length=10)
     department = models.ForeignKey(Department,on_delete=models.SET_NULL, null=True)
     joined = models.DateTimeField(default=timezone.now())
-    language = models.CharField(choices=LANGUAGE, max_length=10, default='english')
-
+    language = models.CharField(choices=LANGUAGE, max_length=10, default='english')      
     def __str__(self):
         return self.first_name
 
@@ -36,7 +37,7 @@ class Kin(models.Model):
     address = models.TextField(max_length=100)
     occupation = models.CharField(max_length=20)
     mobile = models.CharField(max_length=15)
-    employee = models.OneToOneField(Employee,on_delete=models.CASCADE, blank=True, null=True)
+    employee = models.OneToOneField(Employee,on_delete=models.CASCADE, blank=False, null=False)
 
     def __str__(self):
         return self.first_name+'-'+self.last_name
