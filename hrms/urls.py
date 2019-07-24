@@ -21,4 +21,11 @@ urlpatterns = [
 
 #Department Routes
     path('dashboard/department/<int:pk>/', views.Department_Detail.as_view(), name='dept_detail'),
+    path('dashboard/department/add/', views.Department_New.as_view(), name='dept_new'),
+    path('dashboard/department/<int:pk>/update/', views.Department_Update.as_view(), name='dept_update'),
+
+#Attendance Routes
+    path('dashboard/attendance/in/', views.Attendance_New.as_view(), name='attendance_new'),
+    path('dashboard/attendance/<int:pk>/out/', views.Attendance_Out.as_view(), name='attendance_out'),
+
 ]

@@ -1,0 +1,119 @@
+{% extends 'hrms/layout.html' %}
+{% load static %}
+{% block title %} Attendance| HRIS {% endblock title %}
+
+{% block content %}
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'hrms:dashboard' %}">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Attendance </li>
+                    </ol>
+                </nav>
+                <div class="col-lg-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                           <h4 class="text-center text-primary"><i class="fa  fa-check-square-o">&emsp; Employee Attendance </i></h4><hr>
+                                <form class="form-group" method="POST">
+                                    {% csrf_token %}
+                                    <small class="mb-5">** All Fields are required</small><br>
+                                        {{form.errors}}
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Date
+                                                        </th>
+                                                        
+                                                        <th>
+                                                            Staffer
+                                                        </th>
+                                                        <th>
+                                                            Status
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="py-1">
+                                                            {{today}}
+                                                        </td>
+                                                        
+                                                        <td>
+                                                           {{form.staff}}
+                                                        </td>
+                                                        <td>
+                                                            {{form.status}}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-rounded btn-outline-success"><i class="mdi mdi-check"></i>Sign in</button></button>
+                                    </div>
+                                </form><br>
+                            <h4 class="text-center text-primary"><i class="fa  fa-sign-in">&emsp; Signed In Staffer(s) </i> </h4><hr>
+                            {% if present_staffers %}
+                            <small class='text-center'>This is a list of staffer(s) that are currently present. </small>
+                             <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Date
+                                                        </th>
+                                                        <th>
+                                                            First-In (Arrival)
+                                                        </th>
+                                                        <th>
+                                                            Last-Out (Departure)
+                                                        </th>
+                                                        <th>
+                                                            Name
+                                                        </th>
+                                                        <th>
+                                                            Action(s)
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for ps in present_staffers %}
+                                                        <tr>
+                                                            <td class="py-1">
+                                                                {{today}}
+                                                            </td>
+                                                            <td>
+                                                            <strong>{{ps.first_in}}</strong>  
+                                                            </td>
+                                                            <td>
+                                                            
+                                                                <strong>{{ps.last_out }}</strong>  
+                                                            </td>
+                                                            <td>
+                                                            {{ps.staff.first_name}} - {{ps.staff.last_name}}
+                                                            </td>
+                                                            <td>
+                                                                <a href="{% url 'hrms:attendance_out' pk=ps.staff.pk %}" {% if not ps.last_out %} class="btn btn-sm btn-info"  {% endif %} class="btn btn-sm btn-info disabled" > <i class="fa fa-sign-out"></i> Sign-out</a>
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                            {% else %}
+                                <p class="lead"> There are currently no staffers in the system </p>
+                            {% endif %}   
+                                
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

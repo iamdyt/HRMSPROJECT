@@ -1,16 +1,17 @@
-from django.shortcuts import render,redirect, resolve_url,reverse
+from django.shortcuts import render,redirect, resolve_url,reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-from .models  import AdminProfile,Employee, Department,Kin
+from .models  import AdminProfile,Employee, Department,Kin, Attendance
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView,View,DetailView,TemplateView,ListView,UpdateView,DeleteView
-from .forms import RegistrationForm,LoginForm,EmployeeForm,KinForm
+from django.views.generic import FormView, CreateView,View,DetailView,TemplateView,ListView,UpdateView,DeleteView
+from .forms import RegistrationForm,LoginForm,EmployeeForm,KinForm,DepartmentForm,AttendanceForm
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.serializers import serialize
 from django.contrib import messages
-import json
+from django.utils import timezone
+from django.db.models import Q
+
 
 # Create your views here.
 class Index(View):
@@ -61,17 +62,15 @@ class Employee_New(LoginRequiredMixin,CreateView):
     template_name = 'hrms/employee/create.html'
     login_url = 'hrms:login'
     redirect_field_name = 'redirect:'
-    def get_success_url(self):
-        messages.success(self.request, 'Account Created')
-        url = reverse_lazy('hrms:employee_all')
-        return url
+    
     
 class Employee_All(LoginRequiredMixin,ListView):
     template_name = 'hrms/employee/index.html'
     model = Employee
     login_url = 'hrms:login'
     context_object_name = 'employees'
-
+    paginate_by  = 5
+    
 class Employee_View(LoginRequiredMixin,DetailView):
     queryset = Employee.objects.select_related('department')
     template_name = 'hrms/employee/single.html'
@@ -87,13 +86,10 @@ class Employee_View(LoginRequiredMixin,DetailView):
             return context
         
 class Employee_Update(LoginRequiredMixin,UpdateView):
+    model = Employee
     template_name = 'hrms/employee/edit.html'
     form_class = EmployeeForm
-    model = Employee
-    def get_success_url(self):
-        messages.success(self.request, 'Profile Updated Successfully')
-        url = reverse_lazy('hrms:employee_all')
-        return url
+    
     
 class Employee_Delete(LoginRequiredMixin,DeleteView):
     pass
@@ -117,14 +113,14 @@ class Employee_Kin_Update(UpdateView):
     model = Kin
     form_class = KinForm
     template_name = 'hrms/employee/kin_update.html'
-    success_url = reverse_lazy('hrms:employee_all')
 
     def get_initial(self):
         initial = super(Employee_Kin_Update,self).get_initial()
         
         if 'id' in self.kwargs:
             emp =  Employee.objects.get(pk=self.kwargs['id'])
-            initial['id_employee'] = emp.first_name
+            initial['employee'] = emp.pk
+            
             return initial
 
 #Department views
@@ -141,8 +137,37 @@ class Department_Detail(ListView):
         context["dept"] = Department.objects.get(pk=self.kwargs['pk']) 
         return context
     
+class Department_New (CreateView):
+    model = Department
+    template_name = 'hrms/department/create.html'
+    form_class = DepartmentForm
 
+class Department_Update(UpdateView):
+    model = Department
+    template_name = 'hrms/department/edit.html'
+    form_class = DepartmentForm
+    success_url = reverse_lazy('hrms:dashboard')
 
-    
+#Attendance View
 
+class Attendance_New (CreateView):
+    model = Attendance
+    form_class = AttendanceForm
+    template_name = 'hrms/attendance/create.html'
+    success_url = reverse_lazy('hrms:attendance_new')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["today"] = timezone.localdate()
+        pstaff = Attendance.objects.filter(Q(status='PRESENT') & Q (date=timezone.localdate())) 
+        context['present_staffers'] = pstaff
+        return context
+
+class Attendance_Out(View):
+
+    def get(self, request,*args, **kwargs):
+
+       user=Attendance.objects.get(Q(staff__id=self.kwargs['pk']) & Q(status='PRESENT')& Q(date=timezone.localdate()))
+       user.last_out=timezone.localtime()
+       user.save()
+       return redirect('hrms:attendance_new')   

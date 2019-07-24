@@ -7,6 +7,13 @@
         <div class="content-wrapper">
             <div class="row">
                 <div class="col-lg-12 grid-margin">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'hrms:dashboard' %}">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href=" {% url 'hrms:employee_all' %} ">Employee</a> </li>
+                        <li class="breadcrumb-item active" aria-current="page">View</li>
+                    </ol>
+                </nav>
                     <div class="card">
                         <div class="card-body">
                            <h4 class="text-center text-primary"><i class="fa fa-address-book-o">&emsp; Employee's Profile</i></h4><hr>   
@@ -58,6 +65,10 @@
                                         <tr>
                                             <th>Language:</th>
                                             <td>{{employee.language | capfirst}}</td>
+                                        </tr>
+                                         <tr>
+                                            <th>Monthly Salary:</th>
+                                            <td>#{{employee.salary}}</td>
                                         </tr>
                                          <tr>
                                             <th>Enrollment Date:</th>

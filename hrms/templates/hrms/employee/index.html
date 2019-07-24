@@ -8,6 +8,13 @@
         <div class="content-wrapper">
           <div class="row">
             <div class="row">
+            <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'hrms:dashboard' %}">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Employee </li>
+                        <li class="breadcrumb-item active" aria-current="page">All</li>
+                    </ol>
+                </nav>
             <div class="col-lg-12 grid-margin">
               <div class="card">
                 <div class="card-body">
@@ -76,11 +83,33 @@
                         {% endfor %}
                       </tbody>
                     </table>
+
+                    {% if is_paginated %}
+                      <nav aria-label="Page navigation example" class='mt-4'>
+                        <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                          <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">Previous</a></li>
+                        {% else %}
+
+                          <li class="page-item disabled"><span class='page-link '>Previous</span></li>
+                        {% endif %}
+                          <li class="disabled"> <span class='page-link'> Page {{page_obj.number}} of {{page_obj.paginator.num_pages}} </span></li>
+                        {% if page_obj.has_next %}
+                          <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}">Next</a></li>
+                        {% else %}
+                          <li class="page-item disabled"><span class='page-link '>Next</span></li> 
+                        {% endif %}                        
+                        </ul>
+                    </nav>
+                    {% endif %}
+                
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
         {% block noty %}
         <script>
           {% if messages %}

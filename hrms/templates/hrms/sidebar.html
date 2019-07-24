@@ -32,7 +32,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">
+            <a class="nav-link" href="{% url 'hrms:attendance_new' %}">
               <i class="fa fa-calendar"></i>
               <span class="menu-title">&emsp;Attendance</span>
             </a>
@@ -50,23 +50,17 @@
               <span class="menu-title">&emsp;Department</span>
               <i class="menu-arrow"></i>
             </a>
+              <a class="nav-link" href="{% url 'hrms:dept_new' %}"><i class="fa fa-plus"></i>&emsp;New Department</a>
+              
+            <hr>
+
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
+              {% for dept in depts  %}
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'hrms:dept_detail' pk=1 %}">Administrative</a>
+                  <a class="nav-link" href="{{dept.get_absolute_url}}">{{dept.name}}</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'hrms:dept_detail' pk=3 %}">Finance</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'hrms:dept_detail' pk=5 %}">Production</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'hrms:dept_detail' pk=2 %}">Sales</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'hrms:dept_detail' pk=4 %}">Work</a>
-                </li>
+              {% endfor %}
               </ul>
             </div>
           </li>
