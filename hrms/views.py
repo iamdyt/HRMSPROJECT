@@ -98,7 +98,7 @@ class Employee_Kin_Add (CreateView):
     model = Kin
     form_class = KinForm
     template_name = 'hrms/employee/kin_add.html'
-    success_url = reverse_lazy('hrms:employee_view')
+   
 
     def get_context_data(self):
         context = super().get_context_data()
