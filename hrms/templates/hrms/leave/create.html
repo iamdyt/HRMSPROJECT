@@ -1,0 +1,122 @@
+{% extends 'hrms/layout.html' %}
+{% load static %}
+{% block title %} Leave| HRIS {% endblock title %}
+
+{% block content %}
+
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="row">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'hrms:dashboard' %}">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Leave Management </li>
+                    </ol>
+                </nav>
+                <div class="col-lg-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                           <h4 class="text-center text-primary"><i class="fa  fa-check-square-o">&emsp; Employee Leave Management </i></h4><hr>
+                                <form class="form-group" method="POST">
+                                    {% csrf_token %}
+                                    <small class="mb-5">** All Fields are required</small><br>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Start Date
+                                                        </th>
+                                                        
+                                                        <th>
+                                                            End Date
+                                                        </th>
+                                                        <th>
+                                                            Status
+                                                        </th>
+                                                        <th>
+                                                            Employee
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="py-1">
+                                                            {{form.start}}
+                                                        </td>
+                                                        
+                                                        <td>
+                                                           {{form.end}}
+                                                        </td>
+                                                        <td>
+                                                            {{form.status}}
+                                                        </td>
+                                                        <td>
+                                                            {{form.employee}}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        
+                                    <div class="text-center mt-3">
+                                        <button class="btn btn-rounded btn-outline-success"><i class="mdi mdi-check"></i>Submit</button></button>
+                                    </div>
+                                </form><br>
+                            <h4 class="text-center text-primary"><i class="fa  fa-sign-in">&emsp; Approved Applications </i> </h4><hr>
+                            {% if leaves %}
+                            <small class='text-center'>This is a list of approved Staffers leaves application. </small>
+                             <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Start Date
+                                                        </th>
+                                                        
+                                                        <th>
+                                                            End Date
+                                                        </th>
+                                                        <th>
+                                                            Status
+                                                        </th>
+                                                        <th>
+                                                            Employee
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for leave in leaves %}
+                                                        <tr>
+                                                            <td class="py-1">
+                                                                {{leave.start}}
+                                                            </td>
+                                                            <td>
+                                                            <strong>{{leave.end}}</strong>  
+                                                            </td>
+                                                            <td>
+                                                            
+                                                                <strong>{{leave.status}}</strong>  
+                                                            </td>
+                                                            <td>
+                                                            {{leave.employee}}
+                                                            </td>
+                                                            <td>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                            {% else %}
+                                <p class="lead"> There are currently no leave application. </p>
+                            {% endif %}   
+                                
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

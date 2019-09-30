@@ -1,0 +1,66 @@
+{% extends 'hrms/layout.html' %}
+{% load static %}
+{% block title %} Staff Payroll | HRIS {% endblock title %}
+      <!--  MAIN BODY START HERE -->
+          {% block content %}
+
+            <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+           <p class="lead text-center">Staffers Payroll System</p>
+            <div class="col-lg-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                 
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          
+                          <th>
+                            Image
+                          </th>
+                          <th>
+                            First name
+                          </th>
+                          <th>
+                            Last name
+                          </th>
+                          <th>
+                            Mobile
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                      {% for worker in workers %}
+                        <tr>
+                          <td class="font-weight-medium">
+                            <img src="{{worker.thumb.url}}" class='img-fluid rounded-circle' alt="">
+                          </td>
+                          <td>
+                            {{worker.first_name}}
+                          </td>
+                          <td>
+                            {{worker.last_name}}
+                          </td>
+                          <td>
+                            {{worker.mobile}}
+                          </td>
+                        </tr>
+                      {% endfor %}                   
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endblock content %}

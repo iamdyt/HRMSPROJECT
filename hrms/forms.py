@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Employee,Department,Kin,Attendance
+from .models import Employee,Department,Kin,Attendance, Leave
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django import forms
 from django.core import validators
@@ -66,6 +66,19 @@ class AttendanceForm(forms.ModelForm):
     class Meta:
         model = Attendance
         fields = ['status','staff']
+
+class LeaveForm (forms.ModelForm):
+
+    class Meta:
+        model = Leave
+        fields = '__all__'
+
+        widgets={
+            'start': forms.DateInput(attrs={'class':'form-control','type':'date'}),
+            'end': forms.DateInput(attrs={'class':'form-control','type':'date'}),
+            'status':forms.Select(attrs={'class':'form-control'}),
+            'employee':forms.Select(attrs={'class':'form-control'}),
+        }
 
     
         

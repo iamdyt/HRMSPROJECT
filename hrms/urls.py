@@ -28,4 +28,11 @@ urlpatterns = [
     path('dashboard/attendance/in/', views.Attendance_New.as_view(), name='attendance_new'),
     path('dashboard/attendance/<int:pk>/out/', views.Attendance_Out.as_view(), name='attendance_out'),
 
+#Leave Routes
+
+    path("dashboard/leave/new/", views.LeaveNew.as_view(), name="leave_new"),
+
+#PayRoll
+    path("dashboard/pay", views.Payroll.as_view(), name="staff_pay")
+
 ]

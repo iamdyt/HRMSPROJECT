@@ -1,12 +1,12 @@
 from django.shortcuts import render,redirect, resolve_url,reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-from .models  import AdminProfile,Employee, Department,Kin, Attendance
+from .models  import AdminProfile,Employee, Department,Kin, Attendance, Leave
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import FormView, CreateView,View,DetailView,TemplateView,ListView,UpdateView,DeleteView
-from .forms import RegistrationForm,LoginForm,EmployeeForm,KinForm,DepartmentForm,AttendanceForm
+from .forms import RegistrationForm,LoginForm,EmployeeForm,KinForm,DepartmentForm,AttendanceForm, LeaveForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.utils import timezone
@@ -53,6 +53,8 @@ class Dashboard(LoginRequiredMixin,ListView):
         context = super().get_context_data(**kwargs) 
         context['emp_total'] = Employee.objects.all().count()
         context['dept_total'] = Department.objects.all().count()
+        context['admin_count'] = User.objects.all().count()
+        context['workers'] = Employee.objects.order_by('-id')
         return context
 
 # Employee's Controller
@@ -171,3 +173,19 @@ class Attendance_Out(View):
        user.last_out=timezone.localtime()
        user.save()
        return redirect('hrms:attendance_new')   
+
+class LeaveNew (CreateView, ListView):
+    model = Leave
+    template_name = 'hrms/leave/create.html'
+    form_class = LeaveForm
+    success_url = reverse_lazy('hrms:leave_new')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["leaves"] = Leave.objects.all()
+        return context
+
+class Payroll(ListView):
+    model = Employee
+    template_name = 'hrms/payroll/index.html'
+    context_object_name = 'stfpay'

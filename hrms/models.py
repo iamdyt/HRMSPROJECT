@@ -31,7 +31,7 @@ class Employee(models.Model):
     emergency = models.CharField(max_length=11)
     gender = models.CharField(choices=GENDER, max_length=10)
     department = models.ForeignKey(Department,on_delete=models.SET_NULL, null=True)
-    joined = models.DateTimeField(default=timezone.now())
+    joined = models.DateTimeField(default=timezone.now)
     language = models.CharField(choices=LANGUAGE, max_length=10, default='english')
     salary = models.CharField(max_length=16,default='00,000.00')      
     def __str__(self):
@@ -77,3 +77,13 @@ class AdminProfile(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+class Leave (models.Model):
+    STATUS = (('approved','APPROVED'),('unapproved','UNAPPROVED'),('decline','DECLINED'))
+    employee = models.OneToOneField(Employee, on_delete=models.CASCADE)
+    start = models.CharField(blank=False, max_length=15)
+    end = models.CharField(blank=False, max_length=15)
+    status = models.CharField(choices=STATUS,  default='Not Approved',max_length=15)
+
+    def __str__(self):
+        return self.employee + ' ' + self.start
