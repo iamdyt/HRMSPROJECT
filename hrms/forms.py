@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from .models import Employee,Department,Kin,Attendance, Leave
+from .models import Employee,Department,Kin,Attendance, Leave, Recruitment
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django import forms
 from django.core import validators
@@ -79,6 +79,16 @@ class LeaveForm (forms.ModelForm):
             'status':forms.Select(attrs={'class':'form-control'}),
             'employee':forms.Select(attrs={'class':'form-control'}),
         }
-
+class RecruitmentForm(forms.ModelForm):
+    class Meta:
+        model=Recruitment
+        fields = '__all__'
+        widgets = {
+            'first_name':forms.TextInput(attrs={'class':'form-control'}),
+            'last_name':forms.TextInput(attrs={'class':'form-control'}),
+            'position':forms.TextInput(attrs={'class':'form-control'}),
+            'email':forms.EmailInput(attrs={'class':'form-control'}),
+            'phone':forms.TextInput(attrs={'class':'form-control'}),
+        }
     
         

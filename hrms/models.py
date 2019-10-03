@@ -87,3 +87,13 @@ class Leave (models.Model):
 
     def __str__(self):
         return self.employee + ' ' + self.start
+
+class Recruitment(models.Model):
+    first_name = models.CharField(max_length=25)
+    last_name= models.CharField(max_length=25)
+    position = models.CharField(max_length=15)
+    email = models.EmailField(max_length=25)
+    phone = models.CharField(max_length=11)
+
+    def __str__(self):
+        return self.first_name +' - '+self.position

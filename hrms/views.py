@@ -1,12 +1,12 @@
 from django.shortcuts import render,redirect, resolve_url,reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-from .models  import AdminProfile,Employee, Department,Kin, Attendance, Leave
+from .models  import AdminProfile,Employee, Department,Kin, Attendance, Leave, Recruitment
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import FormView, CreateView,View,DetailView,TemplateView,ListView,UpdateView,DeleteView
-from .forms import RegistrationForm,LoginForm,EmployeeForm,KinForm,DepartmentForm,AttendanceForm, LeaveForm
+from .forms import RegistrationForm,LoginForm,EmployeeForm,KinForm,DepartmentForm,AttendanceForm, LeaveForm, RecruitmentForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
 from django.utils import timezone
@@ -38,7 +38,8 @@ class Login_View(LoginView):
         return url
 
 class Logout_View(View):
-    def get(self):
+
+    def get(self,request):
         logout(self.request)
         return redirect ('hrms:login',permanent=True)
     
@@ -189,3 +190,14 @@ class Payroll(ListView):
     model = Employee
     template_name = 'hrms/payroll/index.html'
     context_object_name = 'stfpay'
+
+class RecruitmentNew (CreateView):
+    model = Recruitment
+    template_name = 'hrms/recruitment/index.html'
+    form_class = RecruitmentForm
+    success_url = reverse_lazy('hrms:recruitment')
+
+class RecruitmentAll(ListView):
+    model = Recruitment
+    template_name = 'hrms/recruitment/all.html'
+    context_object_name = 'recruit'

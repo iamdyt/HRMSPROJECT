@@ -108,7 +108,7 @@
                             {{worker.last_name}}
                           </td>
                           <td>
-                            {{worker.mobile}}
+                            {{worker.mobile}} &emsp;<span><a href="{% url 'hrms:employee_view' pk=worker.id %}" class="btn btn-sm btn-info">View</a></span>
                           </td>
                         </tr>
                       {% endfor %}                   
@@ -119,7 +119,6 @@
               </div>
             </div>
           </div>
-         
                   </div>
                 </div>
               </div>

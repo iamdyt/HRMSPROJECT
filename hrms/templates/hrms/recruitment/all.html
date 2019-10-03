@@ -1,0 +1,72 @@
+{% extends 'hrms/layout.html' %}
+{% load static %}
+{% block title %} Recruitment | HRIS {% endblock title %}
+      <!--  MAIN BODY START HERE -->
+          {% block content %}
+
+            <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+           <p class="lead text-center">Submitted Application</p>
+            <div class="col-lg-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                 
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>
+                            First name
+                          </th>
+                          <th>
+                            Last name
+                          </th>
+                          <th>
+                            Mobile
+                          </th>
+                          <th>
+                            E-mail
+                          </th>
+
+                          <th>
+                            Position
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                      {% for rc in recruit %}
+                        <tr>
+                          <td class="font-weight-medium">
+                            {{rc.first_name}}
+                          </td>
+                          <td>
+                            {{rc.last_name}}
+                          </td>
+                          <td>
+                            {{rc.phone}}
+                          </td>
+                          <td>
+                            {{rc.email}}
+                          </td>
+                            <td>
+                            {{rc.position}}
+                          </td>
+                        </tr>
+                      {% endfor %}                   
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endblock content %}

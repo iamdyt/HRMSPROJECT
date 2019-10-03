@@ -67,13 +67,13 @@
 
 
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'hrms:staff_pay' %}">
+            <a class="nav-link" href="{% url 'hrms:recruitmentall' %}">
               <i class="fa fa-database"></i>
               <span class="menu-title">&emsp;Recruitment</span>
             </a>
           </li>
 
-          <li class="nav-item">
+          {% comment %} <li class="nav-item">
             <a class="nav-link" href="pages/tables/basic-table.html">
               <i class="fa fa-usd"></i>
               <span class="menu-title">&emsp;Payroll</span>
@@ -84,6 +84,6 @@
               <i class="fa  fa-gears"></i>
               <span class="menu-title">&emsp;Settings</span>
             </a>
-          </li>
+          </li> {% endcomment %}
         </ul>
       </nav>

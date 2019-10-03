@@ -32,7 +32,9 @@ urlpatterns = [
 
     path("dashboard/leave/new/", views.LeaveNew.as_view(), name="leave_new"),
 
-#PayRoll
-    path("dashboard/pay", views.Payroll.as_view(), name="staff_pay")
+#Recruitment
+
+    path("recruitment/",views.RecruitmentNew.as_view(), name="recruitment"),
+    path("recruitment/all/",views.RecruitmentAll.as_view(), name="recruitmentall"),
 
 ]
