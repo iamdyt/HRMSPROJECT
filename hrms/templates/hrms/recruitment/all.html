@@ -32,6 +32,10 @@
                           <th>
                             Position
                           </th>
+
+                           <th>
+                            Manage
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -52,6 +56,9 @@
                           </td>
                             <td>
                             {{rc.position}}
+                          </td>
+                           <td>
+                            <a href="{% url 'hrms:recruitmentdelete' pk=rc.id %}" class="btn btn-small btn-danger">Delete</a>
                           </td>
                         </tr>
                       {% endfor %}                   

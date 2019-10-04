@@ -201,3 +201,9 @@ class RecruitmentAll(ListView):
     model = Recruitment
     template_name = 'hrms/recruitment/all.html'
     context_object_name = 'recruit'
+
+class RecruitmentDelete (View):
+    def get (self, request,pk):
+     form_app = Recruitment.objects.get(pk=pk)
+     form_app.delete()
+     return redirect('hrms:recruitmentall', permanent=True)
