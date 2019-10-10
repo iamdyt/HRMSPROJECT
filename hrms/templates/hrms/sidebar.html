@@ -7,7 +7,7 @@
                   <img src="{{request.session.auth_user_thumb}}">
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">{{request.session.auth_user | capfirst}} </p>
+                  <p class="profile-name">{{request.session.auth_user | upper}} </p>
                   <div>
                     <small class="designation text-muted">Administrator</small>
                     <span class="status-indicator online"></span>
@@ -73,12 +73,15 @@
             </a>
           </li>
 
-          {% comment %} <li class="nav-item">
-            <a class="nav-link" href="pages/tables/basic-table.html">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'hrms:recruitmentall' %}">
               <i class="fa fa-usd"></i>
               <span class="menu-title">&emsp;Payroll</span>
             </a>
           </li>
+
+          {% comment %} <li class="nav-item">
+
           <li class="nav-item">
             <a class="nav-link" href="pages/icons/font-awesome.html">
               <i class="fa  fa-gears"></i>

@@ -33,6 +33,8 @@ class Employee(models.Model):
     department = models.ForeignKey(Department,on_delete=models.SET_NULL, null=True)
     joined = models.DateTimeField(default=timezone.now)
     language = models.CharField(choices=LANGUAGE, max_length=10, default='english')
+    nuban = models.CharField(max_length=10, default='0123456789')
+    bank = models.CharField(max_length=25, default='First Bank Plc')
     salary = models.CharField(max_length=16,default='00,000.00')      
     def __str__(self):
         return self.first_name

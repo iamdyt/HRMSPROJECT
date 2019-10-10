@@ -207,3 +207,7 @@ class RecruitmentDelete (View):
      form_app = Recruitment.objects.get(pk=pk)
      form_app.delete()
      return redirect('hrms:recruitmentall', permanent=True)
+
+class Pay(ListView):
+    model = Employee
+    template_name = 'hrms/payroll/index.html'
