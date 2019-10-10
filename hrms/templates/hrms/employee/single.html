@@ -74,7 +74,20 @@
                                             <th>Enrollment Date:</th>
                                             <td>{{employee.joined}} </td>
                                         </tr>
+                                        <tr>
+                                            <th>NUBAN:</th>
+                                            <td>{{employee.nuban}} </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Bank:</th>
+                                            <td>{{employee.bank}} </td>
+                                            
+                                        </tr>
+                                        
                                         </table>
+                                        <div class="text-center mt-3">
+                                            <a href=" {% url 'hrms:employee_update' pk=employee.id %}" class="btn btn-lg btn-warning">Update</a>
+                                        </div>
                                     </div>   
                                 </div>
                                 <!-- Third column-->

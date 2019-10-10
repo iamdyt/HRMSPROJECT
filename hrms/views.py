@@ -211,3 +211,4 @@ class RecruitmentDelete (View):
 class Pay(ListView):
     model = Employee
     template_name = 'hrms/payroll/index.html'
+    context_object_name = 'emps'

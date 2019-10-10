@@ -32,9 +32,11 @@ class EmployeeForm (forms.ModelForm):
 
     class Meta:
         model = Employee
-        fields = ('first_name', 'last_name', 'mobile','email','emergency','salary','gender','department','language','thumb')
+        fields = ('first_name', 'last_name', 'mobile','email','emergency','salary','gender','department','bank','nuban','language','thumb')
         widgets={
-            'salary':forms.TextInput(attrs={'class':'form-control'})
+            'salary':forms.TextInput(attrs={'class':'form-control'}),
+            'bank':forms.TextInput(attrs={'class':'form-control'}),
+            'nuban':forms.TextInput(attrs={'class':'form-control'})
         }
 
 class KinForm(forms.ModelForm):

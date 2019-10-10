@@ -27,25 +27,46 @@
                             Last name
                           </th>
                           <th>
-                            Mobile
+                            Account Number
                           </th>
+                          <th>
+                            Bank Name
+                          </th>
+                          <th>
+                            Salary
+                          </th>
+
+                           <th>
+                            Action
+                          </th>
+
                         </tr>
                       </thead>
                       <tbody>
 
-                      {% for worker in workers %}
+                      {% for emp in emps %}
                         <tr>
                           <td class="font-weight-medium">
-                            <img src="{{worker.thumb.url}}" class='img-fluid rounded-circle' alt="">
+                            <img src="{{emp.thumb.url}}" class='img-fluid rounded-circle' alt="">
                           </td>
                           <td>
-                            {{worker.first_name}}
+                            {{emp.first_name}}
                           </td>
                           <td>
-                            {{worker.last_name}}
+                            {{emp.last_name}}
+                          </td>
+                          
+                           <td>
+                            {{emp.nuban}}
                           </td>
                           <td>
-                            {{worker.mobile}}
+                            {{emp.bank}}
+                          </td>
+                           <td>
+                            {{emp.salary}}
+                          </td>
+                           <td>
+                            <button  type='button' onclick="payWithPaystack('{{emp.salary}}','{{emp.nuban}}','{{emp.bank}}')"  class="btn btn-info">  Pay</button>
                           </td>
                         </tr>
                       {% endfor %}                   
@@ -62,5 +83,6 @@
               </div>
             </div>
           </div>
+          
         </div>
         {% endblock content %}
