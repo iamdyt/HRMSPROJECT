@@ -55,7 +55,7 @@ class Kin(models.Model):
         return self.first_name+'-'+self.last_name
     
     def get_absolute_url(self):
-        return reverse("hrms:employee_view",kwargs={'pk':self.employee})
+        return reverse("hrms:employee_view",kwargs={'pk':self.employee.pk})
     
 
 class Attendance (models.Model):
