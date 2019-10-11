@@ -134,4 +134,4 @@ LOGIN_REDIRECT_URL = 'hrms:dashboard'
 MEDIA_URL = '/media/' #This is just for url i.e https://l.me/media/l.jpg
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #This is the folder the image will be uploaded
 
-#django_heroku.settings(locals())
+django_heroku.settings(locals())
