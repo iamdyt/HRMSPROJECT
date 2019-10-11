@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
+import dj_database_url
 
 
 
@@ -79,6 +80,7 @@ WSGI_APPLICATION = 'HRMSPROJECT.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -88,6 +90,11 @@ DATABASES = {
         'PASSWORD':'olanlokun30',
         'PORT':'5432',    }
 }
+
+#this will update settings datbase configuration automatically from heroku and let us local config also
+
+heroku_db_config = dj_database_url.config()
+DATABASES['default'].update(heroku_db_config)
 
 
 # Password validation
