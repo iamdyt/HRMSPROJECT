@@ -93,10 +93,10 @@ WSGI_APPLICATION = 'HRMSPROJECT.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd632o7pb13j7cb',
-        'HOST':'ec2-54-227-250-19.compute-1.amazonaws.com',
-        'USER':'kwnhxlnaahfbta',
-        'PASSWORD':'10c691c25a29b07660ea05e5a1051f5aa4b958a1d177664bbbb18ad4c3462ae5',
+        'NAME': 'dcdvruvpg3p8qq',
+        'HOST':'ec2-54-83-55-122.compute-1.amazonaws.com',
+        'USER':'efincpgoosqset',
+        'PASSWORD':'0fa79143a33dacb91bbce632c959874394fe071cd6bf0353061e44a58cd2c848',
         'PORT':'5432',    
         }
 }
