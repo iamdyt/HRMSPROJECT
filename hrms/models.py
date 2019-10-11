@@ -21,7 +21,7 @@ class Department(models.Model):
 class Employee(models.Model):
     LANGUAGE = (('english','ENGLISH'),('yoruba','YORUBA'),('hausa','HAUSA'),('french','FRENCH'))
     GENDER = (('male','MALE'), ('female', 'FEMALE'),('other', 'OTHER'))
-    emp_id = models.CharField(max_length=70, unique=True, default='emp'+str(random.randrange(100,999,1)))
+    emp_id = models.CharField(max_length=70, default='emp'+str(random.randrange(100,999,1)))
     thumb = models.ImageField(blank=True,null=True)
     first_name = models.CharField(max_length=50, null=False)
     last_name = models.CharField(max_length=50, null=False)

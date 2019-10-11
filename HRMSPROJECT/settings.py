@@ -80,6 +80,7 @@ WSGI_APPLICATION = 'HRMSPROJECT.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+#Development
 
 # DATABASES = {
 #     'default': {
@@ -90,6 +91,8 @@ WSGI_APPLICATION = 'HRMSPROJECT.wsgi.application'
 #         'PASSWORD':'olanlokun30',
 #         'PORT':'5432',    }
 # }
+
+Production
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
