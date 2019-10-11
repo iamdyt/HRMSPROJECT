@@ -1,1 +1,1 @@
-web: gunicorn HRMSPROJECT.wsgi --log-file-
+web: gunicorn HRMSPROJECT.wsgi
