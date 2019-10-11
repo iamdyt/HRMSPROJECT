@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'HRMSPROJECT.wsgi.application'
 #         'PORT':'5432',    }
 # }
 
-Production
+#Production
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
