@@ -132,3 +132,8 @@ LOGIN_REDIRECT_URL = 'hrms:dashboard'
 MEDIA_URL = '/media/' #This is just for url i.e https://l.me/media/l.jpg
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #This is the folder the image will be uploaded
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
