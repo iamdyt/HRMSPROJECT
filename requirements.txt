@@ -1,4 +1,4 @@
-catdj-database-url==0.5.0
+dj-database-url==0.5.0
 Django==2.2.2
 django-heroku==0.3.1
 gunicorn==19.9.0
