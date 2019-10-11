@@ -126,7 +126,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 LOGIN_REDIRECT_URL = 'hrms:dashboard'
 #LOGIN_URL = 'hrms:login'
 MEDIA_URL = '/media/' #This is just for url i.e https://l.me/media/l.jpg
