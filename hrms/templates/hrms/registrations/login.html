@@ -29,7 +29,7 @@
             <div class="text-center mb-2">
               <img src=" {% static 'hrms/images/logo.png' %} " alt="">
             </div>
-            <p class="display-4 mb-4 text-center">Administrator Sign in Portal</p>
+            <p class="display-4 mb-4 text-center text-secondary">Administrator Sign in Portal</p>
             <div class="auto-form-wrapper mb-5">
               <form action=" {% url 'hrms:login' %} " method ='POST'>
                 {% csrf_token %}

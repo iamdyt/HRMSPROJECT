@@ -78,6 +78,7 @@ class Employee_View(LoginRequiredMixin,DetailView):
     queryset = Employee.objects.select_related('department')
     template_name = 'hrms/employee/single.html'
     context_object_name = 'employee'
+    login_url = 'hrms:login'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -92,15 +93,17 @@ class Employee_Update(LoginRequiredMixin,UpdateView):
     model = Employee
     template_name = 'hrms/employee/edit.html'
     form_class = EmployeeForm
+    login_url = 'hrms:login'
     
     
 class Employee_Delete(LoginRequiredMixin,DeleteView):
     pass
 
-class Employee_Kin_Add (CreateView):
+class Employee_Kin_Add (LoginRequiredMixin,CreateView):
     model = Kin
     form_class = KinForm
     template_name = 'hrms/employee/kin_add.html'
+    login_url = 'hrms:login'
    
 
     def get_context_data(self):
@@ -112,10 +115,11 @@ class Employee_Kin_Add (CreateView):
         else:
             return context
 
-class Employee_Kin_Update(UpdateView):
+class Employee_Kin_Update(LoginRequiredMixin,UpdateView):
     model = Kin
     form_class = KinForm
     template_name = 'hrms/employee/kin_update.html'
+    login_url = 'hrms:login'
 
     def get_initial(self):
         initial = super(Employee_Kin_Update,self).get_initial()
@@ -128,9 +132,10 @@ class Employee_Kin_Update(UpdateView):
 
 #Department views
 
-class Department_Detail(ListView):
+class Department_Detail(LoginRequiredMixin, ListView):
     context_object_name = 'employees'
     template_name = 'hrms/department/single.html'
+    login_url = 'hrms:login'
     def get_queryset(self): 
         queryset = Employee.objects.filter(department=self.kwargs['pk'])
         return queryset
@@ -140,22 +145,25 @@ class Department_Detail(ListView):
         context["dept"] = Department.objects.get(pk=self.kwargs['pk']) 
         return context
     
-class Department_New (CreateView):
+class Department_New (LoginRequiredMixin,CreateView):
     model = Department
     template_name = 'hrms/department/create.html'
     form_class = DepartmentForm
+    login_url = 'hrms:login'
 
-class Department_Update(UpdateView):
+class Department_Update(LoginRequiredMixin,UpdateView):
     model = Department
     template_name = 'hrms/department/edit.html'
     form_class = DepartmentForm
+    login_url = 'hrms:login'
     success_url = reverse_lazy('hrms:dashboard')
 
 #Attendance View
 
-class Attendance_New (CreateView):
+class Attendance_New (LoginRequiredMixin,CreateView):
     model = Attendance
     form_class = AttendanceForm
+    login_url = 'hrms:login'
     template_name = 'hrms/attendance/create.html'
     success_url = reverse_lazy('hrms:attendance_new')
 
@@ -166,7 +174,8 @@ class Attendance_New (CreateView):
         context['present_staffers'] = pstaff
         return context
 
-class Attendance_Out(View):
+class Attendance_Out(LoginRequiredMixin,View):
+    login_url = 'hrms:login'
 
     def get(self, request,*args, **kwargs):
 
@@ -175,10 +184,11 @@ class Attendance_Out(View):
        user.save()
        return redirect('hrms:attendance_new')   
 
-class LeaveNew (CreateView, ListView):
+class LeaveNew (LoginRequiredMixin,CreateView, ListView):
     model = Leave
     template_name = 'hrms/leave/create.html'
     form_class = LeaveForm
+    login_url = 'hrms:login'
     success_url = reverse_lazy('hrms:leave_new')
 
     def get_context_data(self, **kwargs):
@@ -186,9 +196,10 @@ class LeaveNew (CreateView, ListView):
         context["leaves"] = Leave.objects.all()
         return context
 
-class Payroll(ListView):
+class Payroll(LoginRequiredMixin, ListView):
     model = Employee
     template_name = 'hrms/payroll/index.html'
+    login_url = 'hrms:login'
     context_object_name = 'stfpay'
 
 class RecruitmentNew (CreateView):
@@ -197,18 +208,21 @@ class RecruitmentNew (CreateView):
     form_class = RecruitmentForm
     success_url = reverse_lazy('hrms:recruitment')
 
-class RecruitmentAll(ListView):
+class RecruitmentAll(LoginRequiredMixin,ListView):
     model = Recruitment
+    login_url = 'hrms:login'
     template_name = 'hrms/recruitment/all.html'
     context_object_name = 'recruit'
 
-class RecruitmentDelete (View):
+class RecruitmentDelete (LoginRequiredMixin,View):
+    login_url = 'hrms:login'
     def get (self, request,pk):
      form_app = Recruitment.objects.get(pk=pk)
      form_app.delete()
      return redirect('hrms:recruitmentall', permanent=True)
 
-class Pay(ListView):
+class Pay(LoginRequiredMixin,ListView):
     model = Employee
     template_name = 'hrms/payroll/index.html'
     context_object_name = 'emps'
+    login_url = 'hrms:login'

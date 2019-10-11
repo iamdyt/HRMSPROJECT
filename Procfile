@@ -1,0 +1,1 @@
+web: gunicorn HRMSPROJECT.wsgi --log-file-
