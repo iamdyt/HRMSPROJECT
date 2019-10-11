@@ -81,13 +81,22 @@ WSGI_APPLICATION = 'HRMSPROJECT.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'hrms',
+#         'HOST':'127.0.0.1',
+#         'USER':'postgres',
+#         'PASSWORD':'olanlokun30',
+#         'PORT':'5432',    }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hrms',
-        'HOST':'127.0.0.1',
-        'USER':'postgres',
-        'PASSWORD':'olanlokun30',
+        'NAME': 'd632o7pb13j7cb',
+        'HOST':'ec2-54-227-250-19.compute-1.amazonaws.com',
+        'USER':'kwnhxlnaahfbta',
+        'PASSWORD':'10c691c25a29b07660ea05e5a1051f5aa4b958a1d177664bbbb18ad4c3462ae5',
         'PORT':'5432',    }
 }
 
