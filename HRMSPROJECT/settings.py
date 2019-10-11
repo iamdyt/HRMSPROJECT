@@ -29,7 +29,7 @@ SECRET_KEY = '#=a7f+o=$5#uln!f9$)d)ax225+(tq&5i613&l^cg2h_$pjg_v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -97,7 +97,8 @@ DATABASES = {
         'HOST':'ec2-54-227-250-19.compute-1.amazonaws.com',
         'USER':'kwnhxlnaahfbta',
         'PASSWORD':'10c691c25a29b07660ea05e5a1051f5aa4b958a1d177664bbbb18ad4c3462ae5',
-        'PORT':'5432',    }
+        'PORT':'5432',    
+        }
 }
 
 #this will update settings datbase configuration automatically from heroku and let us local config also
