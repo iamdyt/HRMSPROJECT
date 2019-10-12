@@ -14,9 +14,8 @@ from django.db.models import Q
 
 
 # Create your views here.
-class Index(View):
-    def get(self,request):
-        return redirect('hrms:login')
+class Index(TemplateView):
+   template_name = 'hrms/home/home.html'
 
 #   Authentication
 class Register (CreateView):
