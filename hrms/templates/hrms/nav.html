@@ -5,7 +5,7 @@
         <p class="display-4 mt-3 text-success">IISCN-HRIS</p>
         <a class="navbar-brand brand-logo-mini" href="{% url 'hrms:dashboard' %}">
         
-          <img src="{{qset.adminprofile.thumb.url}}" />
+          <img src="{{user.thumb.url}}" />
         </a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
@@ -15,7 +15,7 @@
           
             <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <span class="profile-text"> Hello, {{user.username | upper }} ! </span>
-              <img class="img-xs rounded-circle" src=" {{request.session.auth_user_thumb}} " alt="Profile image">
+              <img class="img-xs rounded-circle" src=" {{user.thumb.url}} " alt="Profile image">
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               {% comment %} <a class="dropdown-item p-0">

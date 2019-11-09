@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import django_heroku
-import dj_database_url
+# import django_heroku
+# import dj_database_url
 
 
 
@@ -82,32 +82,21 @@ WSGI_APPLICATION = 'HRMSPROJECT.wsgi.application'
 
 #Development
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'hrms',
-#         'HOST':'127.0.0.1',
-#         'USER':'postgres',
-#         'PASSWORD':'olanlokun30',
-#         'PORT':'5432',    }
-# }
-
-#Production
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dcdvruvpg3p8qq',
-        'HOST':'ec2-54-83-55-122.compute-1.amazonaws.com',
-        'USER':'efincpgoosqset',
-        'PASSWORD':'0fa79143a33dacb91bbce632c959874394fe071cd6bf0353061e44a58cd2c848',
-        'PORT':'5432',    
-        }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'hrms',
+        'HOST':'127.0.0.1',
+        'USER':'root',
+        'PASSWORD':'',
+        'PORT':'3306',    }
 }
+AUTH_USER_MODEL = 'hrms.User'
+#Production
+
+
 
 #this will update settings datbase configuration automatically from heroku and let us local config also
-
-heroku_db_config = dj_database_url.config()
-DATABASES['default'].update(heroku_db_config)
 
 
 # Password validation
@@ -154,4 +143,4 @@ LOGIN_REDIRECT_URL = 'hrms:dashboard'
 MEDIA_URL = '/media/' #This is just for url i.e https://l.me/media/l.jpg
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #This is the folder the image will be uploaded
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())

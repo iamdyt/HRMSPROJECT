@@ -27,8 +27,9 @@
             </div>
             <h2 class="text-center mb-4 text-secondary">Administrator Registration</h2>
             <div class="auto-form-wrapper">
-              <form action=" {% url 'hrms:reg'%} " method ='POST'>
+              <form method ='POST' enctype='multipart/form-data'>
                 {% csrf_token %}
+                {{form.errors}}
                 <div class="form-group">
                   <div class="input-group">
                       {{form.username}}
@@ -69,6 +70,13 @@
                         <i class="mdi mdi-check-circle-outline"></i>
                       </span>
                     </div>
+                  </div>
+                </div>
+
+
+                 <div class="form-group">
+                  <div class="input-group">
+                      {{form.thumb}}
                   </div>
                 </div>
                 

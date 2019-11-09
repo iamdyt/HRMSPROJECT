@@ -3,7 +3,10 @@ import random
 from django.urls import reverse
 from django.utils import timezone
 import time
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+class User(AbstractUser):
+    thumb = models.ImageField()
 
 # Create your models here.
 class Department(models.Model):
@@ -72,13 +75,6 @@ class Attendance (models.Model):
     
     def __str__(self):
         return 'Attendance -> '+str(self.date) + ' -> ' + str(self.staff)
-
-class AdminProfile(models.Model):
-    thumb = models.ImageField(blank=True, default='avatar2.png')
-    user = models.OneToOneField(User,on_delete=models.CASCADE, default=0)
-
-    def __str__(self):
-        return str(self.user)
 
 class Leave (models.Model):
     STATUS = (('approved','APPROVED'),('unapproved','UNAPPROVED'),('decline','DECLINED'))

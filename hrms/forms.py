@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from .models import Employee,Department,Kin,Attendance, Leave, Recruitment
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django import forms
@@ -11,9 +11,10 @@ class RegistrationForm (UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'Valid Email is required'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Password'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'Confirm Password'}))
+    thumb = forms.ImageField(label='Attach a Passport Photograph',required=True,widget=forms.FileInput(attrs={'class':'form-control mt-2'}))
     class Meta:
-        model = User
-        fields = ('username','email','password1', 'password2')
+        model = get_user_model()
+        fields = ('username','email','password1', 'password2','thumb')
 
 class LoginForm(AuthenticationForm):
    username = forms.CharField(widget=forms.TextInput(attrs={'autofocus':True, 'placeholder':'Username Here', 'class':'form-control'}))

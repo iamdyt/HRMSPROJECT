@@ -4,10 +4,10 @@
             <div class="nav-link">
               <div class="user-wrapper">
                 <div class="profile-image">
-                  <img src="{{request.session.auth_user_thumb}}">
+                  <img src="{{user.thumb.url}}">
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">{{request.session.auth_user | upper}} </p>
+                  <p class="profile-name">{{user.username | upper}} </p>
                   <div>
                     <small class="designation text-muted">Administrator</small>
                     <span class="status-indicator online"></span>

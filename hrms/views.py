@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect, resolve_url,reverse, get_object_or_404
 from django.urls import reverse_lazy
-from django.contrib.auth.models import User
-from .models  import AdminProfile,Employee, Department,Kin, Attendance, Leave, Recruitment
+from django.contrib.auth import get_user_model
+from .models  import Employee, Department,Kin, Attendance, Leave, Recruitment
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -19,20 +19,17 @@ class Index(TemplateView):
 
 #   Authentication
 class Register (CreateView):
-    model = User
+    model = get_user_model()
     form_class  = RegistrationForm
     template_name = 'hrms/registrations/register.html'
     success_url = reverse_lazy('hrms:login')
     
 class Login_View(LoginView):
-    model = User
+    model = get_user_model()
     form_class = LoginForm
     template_name = 'hrms/registrations/login.html'
 
     def get_success_url(self):
-        query = User.objects.get(adminprofile__user=self.request.user.pk)
-        self.request.session['auth_user'] = query.username
-        self.request.session['auth_user_thumb'] = query.adminprofile.thumb.url
         url = resolve_url('hrms:dashboard')
         return url
 
@@ -47,13 +44,13 @@ class Logout_View(View):
 class Dashboard(LoginRequiredMixin,ListView):
     template_name = 'hrms/dashboard/index.html'
     login_url = 'hrms:login'
-    model = User
+    model = get_user_model()
     context_object_name = 'qset'            
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs) 
         context['emp_total'] = Employee.objects.all().count()
         context['dept_total'] = Department.objects.all().count()
-        context['admin_count'] = User.objects.all().count()
+        context['admin_count'] = get_user_model().objects.all().count()
         context['workers'] = Employee.objects.order_by('-id')
         return context
 
